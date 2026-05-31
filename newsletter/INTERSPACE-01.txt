@@ -1,0 +1,723 @@
+▓▒░ 101010101 ░▒▓ 010101010 ▓▒░ 101010101 ░▒▓ 010101010 ▓▒░ 101010101 ░▒▓
+    
+    ▀ █▄ █ ▀█▀ █▀▀ █▀█ █▀ █▀█ ▄▀█ █▀▀ █▀▀     INITIALIZED...
+    █ █ ▀█  █  ██▄ █▀▄ ▄█ █▀▀ █▀█ █▄▄ ██▄     █████████ 100%
+    
+░▒▓ 010101010 ▓▒░ 101010101 ░▒▓ 010101010 ▓▒░ 101010101 ░▒▓ 010101010 ▓▒░
+
+-------------------------------------------------------------------------
+           Interspace issue: #01 | Release date: DD-MM-YYYY
+-------------------------------------------------------------------------
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  I N T R O D U C T I O N  █▓▒░                                  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+Interspace is a content design newletter written by Sam Irons, founder of 
+Interspace Studio in Sydney, Australia. The newsletter discusses topics 
+about content strategy, UI/UX writing, technical writing, and other
+content practices.
+
+Interspace is also a community. You've probably received this from a co-
+worker (if I didn't send it to you directly). Communities of practice are
+essential to keeping disciplines resilient, values-driven, and creative.
+If something I've written sparks a discussion, then we're tending to and
+growing that community. Welcome.
+
+In this first issue, I go deep on information architectures, looking at
+if and how we can use LLMs to simulate card sorting and tree testing.
+There's lots of juicy prompts and interesting approaches to steal - from
+academics, from researchers, and from me. If you love getting lost in IA, 
+then this issue is for you. 
+
+If you want to subscribe to future Interspace issues or read back issues, 
+visit this URL:
+
+		<< http://interspacestudio.com.au/newsletter.html >>
+
+PLEASE FORWARD THIS EMAIL TO ANOTHER CONTENT DESIGNER IF YOU THINK THEY'LL
+BE INTERESTED.
+
+Thank you for reading,
+And a huge thanks to Elle Gareghty for inspiring this first issue,
+Lots of love,
+Sam Irons
+irons.sam@interspacestudio.com.au
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  C O N T E N T S  █▓▒░                                          █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+	1 . AI, IA?!
+	2 . Sample data and synthetic users
+	3 . Sort my shit out - erm - I mean, cards! Sort my cards out!
+	4 . Tree testing
+	5 . Discussion
+	6 . This month's reading
+	7 . Thanks!
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  A I, I A?!  █▓▒░                                         <01>  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+I moved back to Sydney recently, having spent 3 years in regional New
+South Wales. And one of my first points of order was to take a walk in 
+Sydney Park with my good friend and content strategist Elle Geraghty. Elle
+pat 2 puppies ("it was a good day"), and we talked about generative AI.
+
+If you don't know Elle, she's a bit of a legend in the Australian content
+community, having run her Content Strategy consulting firm and her ever 
+popular Content Strategy Meetup since 2011. As we've both been thinking 
+deeply about the impacts of generative AI on the content community, the 
+walk was a perfect excuse to probe eachother.
+
+We talked about feedback and how practitioners working with LLMs as part
+of their writing and design practice might be getting incorrect signals
+from what is essentially a giant autocomplete. We talked about the
+opportunity that LLMs present to content designers who are language
+experts that can command language models with ease. We talked about the
+quirks of getting AI to check its own work, and how much of a boon AI can
+be in consulting workflows. Elle's been using it to analyze her emails and
+give her reminders to check in with clients.
+
+We talked about how while the world has been disrupted, design thinking, 
+the double diamond, jobs to be done, and other established design and 
+research practices haven't. They still provide the outcomes people are
+hiring products and content for. Elle pointed out that we're seeing a 
+willingness to experiment without a need for return using AI products, so 
+companies are starting with solutions instead of customer needs. But, that
+will change soon. People will start expecting to see a return on their AI
+investments. And, when that happens, those tried and true design thinking
+skills will serve content designers and strategists well.
+
+So, how do you buck the trend? How do you motivate yourself to learn and
+get opinionated about generative AI in your content workflows?
+
+Well, rather than try to jam a solution without a problem, I suggest to
+Elle that we should approach a familiar problem space that we're
+comfortable with and re-evaluate it with AI in mind. Where can it speed
+us up? Where should we be wary of it?
+
+Elle is an expert in information architectures - IAs. I know, I know.
+AI, IA. This is going to get confusing. Stick with me. Elle's IA expertise
+means that she knows the practice back to front, from card sorting through
+tree testing.
+
+Interpreting results and building best fits from multiple studies, I
+feel like that's usually more art than science. I've stared at enough 
+dendograms and similarity matrices trying to build variant trees from my
+observations. It does my head in. It makes me feel less-than-confident.
+
+The majority of our design tools, practices, and rituals are made to 
+increase confidence in our decisions. So, I wonder if LLMs can help us
+feel more confident about how we group like things to match mental models,
+or give us a quick leg up on categorizing and organizing sets of objects.
+
+The eager little statistical models feed off data. They can card sort
+millions of objects, if needed. They can generate endless groupings and 
+categorizations at any level of fidelity or nesting. Why not unleash 
+them on our content and see if it helps our IA practice?
+
+Elle issued the challenge: Show me what AI can do for IA. So, here's some
+experimentation and thoughts about just that.
+
+You can check out Elle's work on her website: 
+		
+		<< https://www.ellegeraghty.com.au/ >>
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  S A M P L E   D A T A              █▓▒░                  <02>  █
+█  ░▒▓█  &   S Y N T H E T I C   U S E R S  █▓▒░                        █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+My partner is getting a Geo-spatial Sciences degree (to add to her other
+engineering degrees), and she's been building SQL databases in Python.
+Turns out sample data generation is a great use case for LLMs, and it may 
+reduce bias introduced by researchers. Of course, it may introduce its own 
+biases due to how LLMs learn and are reinforced.
+
+Before experimenting with card sort simulations, I wanted a good set of
+content to test against. So, I prompted Claude to generate sample data:
+
+\\ You are an expert technical writer who specializes in product 
+\\ documentation. Generate a sample data set for the sitemap of a complex 
+\\ software product. This should follow DITA best practices and topic- 
+\\ based authoring approaches.
+
+Claude generated an XLM sitemap of topic references. I want titles for
+testing card sort approaches:
+
+\\ Using this sitemap, generate a list of unique topic titles for each 
+\\ topicref.
+
+Claude generated 156 unique topic titles from its original sitemap. How 
+exciting! It would've taken me a day to think up a dataset of 150+
+realistic entries for testing. 
+
+Claude took the liberty of grouping these topics under sections. That's 
+one step too far for what I've asked it to do, but it provides a sort of
+baseline for how LLMs categorize without the context we'll give it later.
+
+The categories it produced were:
+- Product overview (5 topics)
+- Getting started (11 topics)
+- User guide (collection)
+	- Dashboard management (8 topics)
+	- Data sources (14 topics)
+	- Data preparation (7 topics)
+	- Visualizations (8 topics)
+	- Analytics and reporting (7 topics)
+	- Collaboration (6 topics)
+- Administration guide (collection)
+	- User management (8 topics)
+	- System configuration (7 topics)
+	- Security (7 topics)
+	- Monitoring and maintenance (7 topics)
+- Developer guide (collection)
+	- API documentation (14 topics)
+	- SDK documentation (7 topics)
+	- Extensions and plugins (6 topics)
+	- Integration guide (6 topics)
+- Troubleshooting (9 topics)
+- Reference (10 topics)
+- Appendices (5 topics)
+- Resources (4 topics)
+
+Without diving into each topic title, you can see that the data set is
+familiar and feels real enough to a documentation set for a software
+product. And, its assumption on how to organize the content also feels
+familiar, organizing into guides based on user type (end user, admin,
+developer). It feels eerily similar to how Atlassian organizes their
+documentation content.
+
+However, we don't want these categorized and organized yet (that's what
+card sorting is for!). Easy to fix:
+
+\\ Remove the groupings and randomize the order of the titles.
+
+Done and dusted. Now we have a sample data set for card sorting and a
+starting point for iterating on the organization of our data set.
+
+LLMs excel at sample data. Content professionals can use this type of 
+approach for generating all kinds of dummy content content. Its a layer of 
+fidelity just above Lorem Ipsum, but its is useful at scale and can save
+you a heap of time.
+
+Examples:
+- Generate entries and metadata for lists of objects in a table view.
+Think tables, feeds, cards and dashboards.
+- Generate mock conversations or transcripts for chat or video designs.
+- Generate translations to test localization layouts.
+- Generate mock customer reviews or support queries.
+
+This type of content - the type that is usually user-generated - doesn't
+need to be high-quality. Its not critical to the user experience like
+buttons, dialogs, warnings, and other system-supplied microcopy. In fact,
+inconsistent, slightly off content can give designs a more authentic feel 
+when designing and prototyping. They may feel more real, as users don't 
+always follow best practices themselves.
+
+Most content designers will have a real content set to leverage for AI-
+augmented IA investigations. Even if this is the case, there's a important
+part of testing that needs to be generated to get a representative result.
+Personas! The characteristics and demographics of card sort participants
+have an influence on the results and categories of grouping (maybe less
+than it should, but still...).
+
+Fortunately, LLMs are getting better and better at generating synthetic
+users to use in testing simulations. Here's a little prompt I've written
+to generate synthetic user personas to test against:
+
+\\ Generate 3 distinct sample user personas for users of {product name},
+\\ {product description}. Include personal background information such as
+\\ age, gender, ethnicity, education, and family status. Include
+\\ professional information such as job title or occupation, income level,
+\\ and work experience. Include user environment information such as the
+\\ physical, social, and technological context of the user. Include
+\\ psychographic information such as attitudes, interests, motivations,
+\\ and pain points related to their context and use of {product name}.
+
+You may be surprised at how real these personas feel. But, its always
+worth sharing them with colleagues (like your research buddies!) and
+tweaking them where needed to reflect your real userbase.
+
+In my experiment, Claude generated the following high level personas:
+1. Sarah Chen - The power user who lives in the tool daily, needs 
+advanced features and efficiency
+2. Marcus Johnson - The IT gatekeeper focused on security, compliance, 
+and system reliability
+3. Priya Desai - The business decision-maker who needs insights quickly 
+without technical complexity
+
+Each description feels real to me. For example, Priya - a completely
+synthetic persona remember? - is a 38 year-old marketing director in 
+Austin, TX. According to the generated profile, she makes $145K/year at 
+a SaaS company and works hybrid (2 days per week in the office). She uses
+a single laptop screen at home. She's comfortable with tech - "uses
+software daily but does not code", primarily working in Salesforce,
+HubSpot, Google Analytics, and Slack. She values storytelling through
+data visualization, is motivated to advance her career to VP or CMO, and
+has trouble attributing which campaigns drive actual revenue.
+
+The level of detail is pretty incredible, and this type of context is a
+great starting point for designing. If you've ever asked, "Who am I
+designing for?" and been met with crickets from your product leadership,
+well, this can help you start that critical conversation. :) 
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  S O R T   M Y   S H I T   O U T -    █▓▒░                <03>  █
+█  ░▒▓█  E R M -   I   M E A N,  C A R D S !  █▓▒░                      █
+█  ░▒▓█  S O R T   M Y   C A R D S   O U T !  █▓▒░                      █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+Thankfully, I'm not the first person to think about using LLMs for card
+sorting. Researchers at the Slovak University of Technology published a
+paper earlier in the year titled Card Sort Simulator: Augmenting Design of
+Logical Information Architectures with Large Language Models. You can read 
+it in full here: 
+
+		<< https://arxiv.org/pdf/2505.09478 >>
+
+At a broad level, these researchers took a sample set of 28 open card sort
+activities provided by UXtweak, including data from some 1399 participants.
+They then designed a synthetic LLM system for recreating the tests and 
+assessing generated outputs against these real studies. They sought to
+answer a few questions:
+
+1. Do LLM-generated card sorting results align with those produced by real 
+participants?
+2. How does the selection of the LLM model affect the similarity of 
+LLM-generated card sorting results to data from real participants?
+3. How does inclusion of context in the prompt affect the similarity of 
+LLM-generated card sorting results to data from real participants?
+4. How does the complexity of a card sorting study (number of cards, 
+complexity of card labels) affect its LLM-generated results?
+5. What are the common issues that appear when LLMs are used to simulate 
+card sorting?
+
+Prompt design, of course, was critical. As LLMs are want to do, if you
+give them too much ambiguity, they hallucinate, creating cards that didn't
+exist in the data set, or duplicating cards showing stronger relationships
+than exist in the human test results.
+
+This is one prompt they used to simulate a card sort activity, that had 
+the "most accurate reflections of card sorting by humans". Go ahead and 
+steal it/tweak it for your next experiment (just remember to replace the 
+{variables} with your context:
+
+\\ Instructions:
+\\ - Imagine you represent {numberOfParticipants} participants in an open 
+\\ card sorting study.
+\\ - Group the cards provided to you into meaningful categories based on 
+\\ their similarities.
+\\ - Assign descriptive category names that reflect the shared themes or 
+\\ characteristics of each category’s cards, while incorporating the 
+\\ perspectives and logic of the participants.
+\\ - Output a list of all categories with their corresponding cards. Your 
+\\ output is an aggregation, obtained after the individual results from 
+\\ all participants were analyzed and a single “best” card sorting result 
+\\ was created that aligns with collective mental models of users as best 
+\\ as possible.
+\\ - Use a reasonable number of categories (more than one).
+\\ - Use all of the provided cards exactly once, each card has to belong 
+\\ to one category only.
+\\ - Keep the cards as they are, including any grammatical mistakes or 
+\\ unnecessary characters.
+\\ - If text in brackets appears in the card list, it presents a 
+\\ description of the card that is provided for context only. This 
+\\ description should not appear in the results.
+\\
+\\ Group the cards from the perspective of participants with the following
+\\ context:
+\\ - Demographic attributes for respondents are: {demographicAttributes}
+\\ - Welcome message received by participants is: "{welcomeMessage}"
+\\ - Instructions before the task received by participants are: 
+\\ "{instructions}"
+\\ - Additional considerations: all categories have to be named (no 
+\\ ’Unnamed category’ entries)
+\\
+\\ Output rules:
+\\ - Present your results in CSV format with two columns: "categoryName" 
+\\ and "cardName".
+\\ - Enclose card and category names in quotation marks. If a quotation 
+\\ mark appears within the text, escape it by doubling it (""), as 
+\\ standardly done in CSV.
+\\ - Do not use unnecessary blank lines to divide categories.
+\\ 
+\\ Example:
+\\ ```
+\\ In the example below, Cat and Dog were placed in the same category 
+\\ (Animals):
+\\ categoryName,cardName
+\\ Animals,Cat
+\\ Animals,Dog
+\\ Means of transport,Plane
+\\ ```
+\\ 
+\\ Cards to sort:
+\\ ```
+\\ {cards}
+\\ ```
+\\
+\\ Before displaying the CSV result, check if all cards are included 
+\\ exactly once - {numberOfCards} cards should be present. No duplicate 
+\\ are allowed.
+
+OK, but what about results? Does this approach actually work?
+
+Yes! And also no. But, there's promise here. Here's some of the highlights
+from the researcher's findings:
+
+* Generally, the researchers found that synthetic card sorting results
+align with those produced by humans.
+* LLMs may generate more clusters than humans. This can be mitigated with 
+prompt engineering.
+* LLMs tend to group cards "into categories at conceptual levels either 
+too generic or too specific in comparison to real participants." Humans 
+created a diversity of category titles that LLMs did not. And high-level
+titles generated by LLMs were not commonly found among human participants.
+In other words, the groupings may be representative, but the labels aren't
+so much.
+* Claude performed better, but only nominally. ChatGPT may be better for 
+generating similarity matrices and can handle greater CSV output volume.
+* Context (demographic attributes, welcome messages, etc.) made minimal 
+improvements to similarity with human responses - for Claude specifically.
+I still believe providing personas gives valuable context in niche cases.
+
+Perhaps a little counterintuitively, the more cards sorted and the 
+higher the complexity of card labels, the less agreement LLMs had with
+human participants. This may have something to do with how humans fatigue
+when conducting large or complex sorting activities, I suspect. But, it
+also has something to do with the opportunities for introducing errors.
+
+High card counts introduce more errors, such as an LLM omiting cards in 
+the data set or duplicating cards during its sort. LLMs may modify card 
+labels, or introduce extra rows or unintended spaces. "Notably, no models 
+hallucinated new cards into existence", which is good. It is important to 
+validate and verify the generated output for quality before accepting its
+results.
+
+Reinforcement learning should improve results. Run card sort prompts
+as part of your regular practice, to get a small signal and/or generate
+tree variants before testing with real users. The more you do, with your
+LLMs' memory intact, the more you'll find similarities with real user
+participants.
+
+I plugged in my sample data set, and pointed Claude to my generated user
+personas for running a synthetic card sort activity. I asked Claude to 
+simulate 20 card sorts, and then generate a single "best fit" result, in
+accordance with the prompts presented by our Slovakian researchers.
+
+Here's the resulting categories (to compare to our original synthetic 
+generated sample set):
+
+1. Getting started & installation (11 cards)
+2. Connecting to data (14 cards)
+3. Preparing & transforming data (8 cards)
+4. Creating dashboards & visualizations (14 cards)
+3. Reports & analytics (7 cards)
+4. Sharing & collaboration (9 cards)
+5. User & access management (6 cards)
+6. Authentication & security (13 cards)
+7. System configuration & administration (10 cards)
+8. Monitoring & performance (7 cards)
+9. Developer tools & APIs (17 cards)
+10. Customization & extensions (6 cards)
+11. Integrations & webhooks (3 cards)
+12. Troubleshooting & support (9 cards)
+13. Product information & overview (6 cards)
+14. Learning resources & best practices (4 cards)
+15. Reference & documentation (10 cards)
+
+Now, we've got 2 groupings, perfecly ready to pit against eachother. You
+can probably predict what I'm thinking next – tree testing! If synthetic
+card sorting is feasible (and representative) with LLMs, I wonder how
+they'll fair with tree testing.
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  T R E E   T E S T I N G  █▓▒░                            <04>  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+Back to scouring the internet, I found a paper from MeasuringU, a site
+that always feels a bit like a warm blanket for me. Jeff Sauro, Will
+Schiavone, and Jim Lewis used the site tree from the US Internal Revenue
+Service to simulate task-based location tests using ChatGPT. The paper is
+a bit old right now, but you can view it in full here:
+
+		<< https://measuringu.com/chatgpt4-tree-test/ >>
+
+The team's approach was to give the LLM a tree and key user tasks, then
+ask it to locate where it thought the task could be completed. This is
+standard for tree testing. They also asked the LLM to give a single-ease
+rating (SEQ) to each task as it performed it. And, they ran this 5 times
+to get results. I think our Slovakian friends have a better approach in
+asking the LLM to run multiple scenarios in the background and present
+aggregated results. Sauro, Schiavone, and Lewis also ran a concurrent
+human study with 33 participants to compare results.
+
+At a high level, they found:
+* LLMs are "not suitable for estimating how well humans will find items
+in a tree test."
+* ChatGPT outperformed humans consistently on finding the correct path 
+for all tasks given. Significantly. Human performance was around 50% 
+average in the tasks given. The AI was successful in all tasks, except
+one.
+* ChatGPT's responses to SEQ questions strongly correlated with human
+participant responses.
+* ChatGPT also struggled on the task that humans identified as the most
+difficult.
+
+This paper came out in mid 2024. I wonder how much LLMs have improved
+since. At any rate, here's their prompts, if you want to try something
+similar yourself.
+
+\\ Imagine you’re on the IRS website, navigating the menu while looking 
+\\ for some information. Learn this website structure, as I will ask you 
+\\ to complete navigation tasks. Use this structure as if you were a real 
+\\ person navigating a real menu and provide the path that you would 
+\\ click through to find information on each task.
+\\
+\\ MENU STRUCTURE
+\\
+\\ {Tree}
+
+\\ Take your best guess at where each piece of information is located, 
+\\ even for paths that you are not certain about. You should have a path 
+\\ for every task. Represent the path by including a > in between each 
+\\ step.
+\\
+\\ Your tasks are as follows:
+\\
+\\ {Tasks}
+
+\\ Great, now for each of the tasks you completed, indicate how difficult 
+\\ an average person would think it was to find each topic from 
+\\ 1-Very difficult to 7-Very easy.
+
+You can see a wide difference between the prompt design of the Slovakian
+researchers against the early experiments of MeasuringU writers. While 
+these instructions definitely represent how you might conduct a test with
+humans, I feel it leaves a lot to interpretation.
+
+The authors admit that LLMs have one great advantage - they get to see 
+the full tree before making guesses on where certain information lives. 
+Tools like Treejack progressively disclose the branches of trees.
+Personally, I pay close attention to LOST-ness and other observations of
+how humans click into, then back out of, certain parts of trees when
+looking for information. These points of confusion can mean more than
+simple task success.
+
+Can we make a better prompt and get closer to representative results?
+I'm willing to try.
+
+Here's the prompt I've devised (stealing ideas from the card sorting
+simulation above). Look out for any {variables} when recreating. You might
+pick out that I've used best practice wording from Optimal Workshop, and
+framed results interpretations based on definitions from Nielsen Norman.
+
+// Simulate a task-based location test, commonly called a tree test (or 
+// Treejack test). 
+//
+// Instructions:
+// - Imagine you represent 6 participants in a tree test study.
+// - Each participant is tasked to find specific information and presented
+// with a list of topics in a heirarchy.
+// - Navigate through the list until you arrive at one you think will help
+// you complete the task. You should consider only the current level of 
+// heirarchy when making navigation decisions. Navigating implies that 
+// lower level list items are progressively disclosed as you choose to 
+// look further down paths in the tree.
+// - If you take a wrong turn, go back to a higher level in the heirarchy 
+// and try again.
+// - Identify only 1 correct place (the most appropriate list item) that 
+// you believe satisfies each task.
+// - Undergo the exercises from the perspectives of participants that 
+// closely resemble the {generated user personas or demographic context}.
+// - Record and count the number of steps it takes you to find that 
+// appropriate location. For example, Home > Creating Dashboards & 
+// Visualizations > Home > Reports & Analytics > Scheduling Automated 
+// Reports implies 4 steps to find the location.
+// - Do not limit how many steps participants may take in finding their 
+// answer. Instead, simulate how a real person navigates through the tree
+// to locate information.
+// 
+// Present the following results:
+// - Success rate: The number and percentage of users who found the 
+// right category (or categories) for each task
+// - Directness: The percentage of users who went to the right category 
+// immediately, without backtracking or trying any other categories
+// - Time spent: The average amount of time elapsed from the beginning 
+// to the end of the task
+// - Selection frequencies for each category in the tree: How many people 
+// tried each category
+// - First click: The category most people selected first
+// - Destination: The category most people designated as their final 
+// answer
+//
+// Tasks for tree test study:
+// {list of tasks}
+//
+// List of topics for tree test study:
+// {tree}
+// 
+// Correct mapping for tasks to locations for evaluating success in tree 
+// test study:
+// {answer guide. Example: TASK 1: Prove marketing campaign ROI to 
+// executives → Reports & Analytics > Creating Reports}
+
+The results from my synthetic tests look similar to the MeasuringU paper.
+The success rates from synthetic users are still very high. In my case,
+sythetic users saw 100% task success on 5 of 10 tasks, and 5/6 synthetic
+users were successful in the remaining 5 tests. That 91.7% success rate
+is something I've never seen personally as a content expert running tree
+studies.
+
+Here's a snippet of the output I received:
+
+Participant Paths and Navigation
+TASK 1: Where would you go to learn how to prove marketing campaign ROI to
+executives?
+Participant 1 (Priya): Home > Reports & Analytics > Creating Reports ✓ 
+(2 steps - Direct)
+Participant 2 (Sarah): Home > Creating Dashboards & Visualizations > 
+Home > Reports & Analytics > Creating Reports ✓ (4 steps)
+Participant 3 (Priya): Home > Reports & Analytics > Creating Reports ✓ 
+(2 steps - Direct)
+Participant 4 (Sarah): Home > Reports & Analytics > Creating Reports ✓ 
+(2 steps - Direct)
+Participant 5 (Marcus): Home > Reports & Analytics > Analytics Overview > 
+Home > Reports & Analytics > Creating Reports ✓ (5 steps)
+Participant 6 (Priya): Home > Reports & Analytics > Creating Reports ✓ 
+(2 steps - Direct)
+Results:
+Success Rate: 6/6 (100%)
+Directness: 4/6 (67%)
+Average Steps: 2.8
+Time Spent: 42 seconds (average)
+First Click: Reports & Analytics (5), Creating Dashboards & 
+Visualizations (1)
+Destination: Reports & Analytics > Creating Reports
+
+There are obvious differences between the results and what you can expect
+testing with human participants. For example, humans will usually perform
+exploratory clicks when they first encounter the tree. This is a common
+problem when interpreting results from human participants. You can easily
+detect which task was presented first to the participant by these click
+paths, where people investigate multiple sections of the tree to get a
+sense of what each path contains.
+
+I ran this same prompt against the first heirarchy that Claude generated
+for our sample data before I stripped it and ran it through a card sort.
+That tree was role-based and had 3 levels of heirarchy.
+
+Interestingly, Claude automatically gave some comparison output of the 
+2 simulated tests, along with my simulated test results. It also
+generated the following recommendations:
+
+1. Consider a hybrid approach: Keep role-based top level 
+(User/Admin/Developer) but reduce sub-category depth.
+2. Improve category labels for clarity:
+	- Consider "Dashboard Management & Sharing" to better signal sharing 
+	functionality
+	- Distinguish "Visualizations & Analysis" from "Reports & Scheduled 
+	Analytics"
+3. Add wayfinding aids:
+	- Breadcrumbs would help users understand where they are in the deeper 
+	hierarchy
+	- "Popular tasks" or "Quick links" could bypass navigation for common 
+	tasks
+4. Cross-reference related content:
+	- Link Security (Administrator) with Security Settings (Getting 
+	Started)
+	- Connect Dashboard sharing with Integration/Embedding
+5. Consider task-based entry points: Create alternate navigation paths 
+like "I want to..." that bypass role-based structure for common workflows
+6. Test middle ground: A 2-level structure (User Guide > Topics) might 
+balance findability with scannability better than either 1-level or 
+3-level hierarchies
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  D I S C U S S I O N  █▓▒░                                <05>  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+What do I make of all of this AI IA stuff? What am I going to say to Elle
+on our next park walk?
+
+First, LLMs cannot fully replace human insights in IA investigations. But
+they can supplement in a pinch and they can provide direction for content
+practictioners who may not have access or resources to run in-depth
+studies on their own. Optimal Workshop is something like $2000/year,
+which is out of reach for freelancers or organizations that don't invest
+in content tooling.
+
+Synthetic card sorting can closely simulate real world usage. I have much
+higher confidence there after diving deep into comparative studies from
+the Slovak University of Technology.
+
+Synthetic tree testing, however, should be taken with a grain of salt. I
+do find there is value in the comparisons between synthetic tests. But, 
+LLMs show performance on synthetic tests that are just too good in terms
+of participant success. They don't match my lived experience at all. More
+work is needed in prompt engineering, I think, to get representative
+results.
+
+I was impressed with the LLM's ability to generate sample data to use in
+these tests, including user personas. These should be validated against
+your actual user base (in partnership with a research professional).
+
+Overall, I give the approach a 4/6. I learned a lot. Mainly:
+
+- SAMPLE DATA ✓ Yes. LLMs handle this with ease.
+- CARD SORT SIMULATION. ✓ Yes. Results are close enough to be useful.
+- TREE TESTING. ✗ In a pinch. Use for comparison and suggestions, not for
+quantitative data.
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  T H I S   M O N T H ' S   R E A D I N G  █▓▒░            <06>  █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+Here's your monthly oracle reading from the Design Oracle!
+
+YOUR DECEMBER PRACTICE
+
+This month calls for empirical curiosity balanced with synthetic wisdom. 
+You're not abandoning traditional methods—you're expanding your toolkit. 
+Adapt your practices and test rigorously. Remain open to surprising 
+insights from both human and artificial intelligence. Strong opinions will 
+emerge from your ability to discern which insights each method uniquely 
+provides.
+
+The cards suggest December is a month of discovery rather than 
+conclusions. Embrace the experimental nature of this work, document what 
+you learn, and trust that by year's end, you'll have developed your own 
+methodology for when and how to leverage LLMs in your practice.
+
+Get your own oracle deck, drive personal insights, and get motivated with
+design rituals with the Design Oracle. The Design Oracle is available for 
+free in the public domain at:
+
+		<< http://design-oracle.github.com >>
+
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█  ░▒▓█  T H A N K S !  █▓▒░                                            █
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+That's a wrap for our first issue. If you want to subscribe to new issues
+or read back issues, you can find them here:
+
+		<< http://interspacestudio.com.au/newsletter.html >>
+
+You can also check out my services and rates there. I'm available to help
+your business transact on their content. I consult, I contract, I coach, 
+and I speak. Don't hesitate to reach out to see what I can do for your
+business.
+
+		<< irons.sam@interspacestudio.com.au >>
+
+A huge thanks to Elle Gareghty for inspiring this first issue. Please
+check out her work. She's a rock star content strategist available to help
+your team get the most from their content:
+
+		<< https://www.ellegeraghty.com.au/ >>
+
+Until next time!
